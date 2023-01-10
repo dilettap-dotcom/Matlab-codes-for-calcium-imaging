@@ -2,8 +2,8 @@
 % folder and its subfolders, load them and merge them within a struct. 
 % The matlab current directory should be the folder where the .mat files you want to import are located (even in subfolders)
 % This script uses the function subdir
-
-a = subdir ('*IEIs.mat'); 
+clear all
+a = subdir ('*IEIs.mat'); % change the name according to the variable of interest
 for i = 1:length(a)
     IEI(i)=load(a(i).name)
 end
@@ -19,5 +19,12 @@ end
 end
 
 
+
+str = pwd;
+[~,pname] = fileparts(str);
+fname = sprintf('%s_IEIs.mat',pname);  % to save the final vector with the name of the folder; change the nme of the varioable accordingly
+
+assignin('base',pname, merge )
+save (fname, pname)
 
 
